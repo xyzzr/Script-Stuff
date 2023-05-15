@@ -1,0 +1,33 @@
+_G.health = true -- true / false
+getgenv().audio_settings = {
+   pitch = 1,
+   distortion = 1,
+   volume = 1,
+   audio = 2665514874,
+}
+
+-- Boombox Needs Gamepass (20 Robux)
+
+
+local args = {
+    [1] = getgenv().audio_settings.pitch
+}
+game:GetService("Players").LocalPlayer.PlayerGui.RadioGui.audioframe.Pitch.SliderObject.ComparableValue.RemoteEvent:FireServer(unpack(args))
+local args = {
+    [1] = getgenv().audio_settings.distortion
+}
+game:GetService("Players").LocalPlayer.PlayerGui.RadioGui.audioframe.DistortionSoundEffect.Slider.SliderObject.ComparableValue.RemoteEvent:FireServer(unpack(args))
+local args = {
+    [1] = getgenv().audio_settings.volume
+}
+game:GetService("Players").LocalPlayer.PlayerGui.RadioGui.audioframe.Volume.SliderObject.ComparableValue.RemoteEvent:FireServer(unpack(args))
+local args = {
+    [1] = getgenv().audio_settings.audio
+}
+game:GetService("ReplicatedStorage").RadioEvent:FireServer(unpack(args))
+
+
+while _G.health == true do
+wait()
+game:GetService("ReplicatedStorage").MoreHealth:FireServer()
+end
