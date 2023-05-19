@@ -153,7 +153,7 @@ game.Players.LocalPlayer.Character["Right Arm"]:Destroy()
 game.Players.LocalPlayer.Character["Left Arm"]:Destroy()
 local plr = game.Players.LocalPlayer
 local old = plr.Character.HumanoidRootPart.CFrame
-wait(5.5)
+wait(6.1)
 plr.Character.HumanoidRootPart.CFrame = old
         end)
 
