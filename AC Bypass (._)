@@ -1,0 +1,98 @@
+-- AC-Bypass'
+
+PlaceId = game['PlaceId']
+
+if PlaceId == 455366377 or PlaceId == 4669040 then
+	local Detected = {'WalkSpeed', 'JumpPower', 'HipHeight', 'Health'}
+	local Namecall, NewIndex;
+
+	NewIndex = hookmetamethod(game, '__newindex', newcclosure(function(self, key, value)
+		if not checkcaller() then
+			if IsA(self, 'Humanoid') and key == 'Health' then
+				return
+			end
+			if key == 'CFrame' and IsDescendantOf(self, LP['Character']) then
+				return
+			end
+		end
+		return NewIndex(self, key, value)
+	end))
+	Namecall = hookmetamethod(game, '__namecall', newcclosure(function(self, ...)
+		if checkcaller() then return Namecall(self, ...) end
+		local Args = {...}
+		local Method = getnamecallmethod()
+		if Method == 'FireServer' then
+			if self.Parent == GetService(game, 'ReplicatedStorage') then
+				return wait(9e9)
+			end
+			if TFind(Detected, Args[1]) then
+				return wait(9e9)
+			end
+			if self.Name == 'Input' then
+				if Args[1] == 'bv' or Args[1] == 'hb' or Args[1] == 'ws' then
+					return wait(9e9)
+				end
+			end
+		end
+		if Method == 'Kick' and self == LP then
+			return wait(9e9)
+		end
+		if Method == 'Destroy' and (self == LP or IsA(self, 'BodyMover')) then
+			return wait(9e9)
+		end
+		if self == LP['Character'] and (Method == 'ClearAllChildren' or Method == 'BreakJoints') then
+			return wait(9e9)
+		end
+		return Namecall(self, unpack(Args))
+	end))
+end
+
+if PlaceId == 2788229376 then
+	local Index; Index = hookmetamethod(workspace.Players, '__index', function(self, Key)
+		local Result = Index(self, Key)
+		if not checkcaller() and (Result and typeof(Result) == 'Instance') and IsA(Result, 'ProximityPrompt') and TFind(Prompts, Result) then
+			return nil
+		end
+		return Result
+	end)
+	local Namecall; Namecall = hookmetamethod(GetService(game, 'ReplicatedStorage'), '__namecall', function(self, ...)
+		local Args = {...}
+		if not checkcaller() then
+			local Method = getnamecallmethod()
+			if Method == 'FireServer' and Match(Lower(Args[1]), 'check') or Args[1] == 'OneMoreTime' then
+				return wait(9e9)
+			end
+		end
+		return Namecall(self, unpack(Args))
+	end)
+
+	local CharacterAdded = function(Character)
+		local HumanoidRootPart = WaitForChild(Character, 'HumanoidRootPart')
+		local UpperTorso = WaitForChild(Character, 'UpperTorso')
+		
+		local Connections = {}
+		repeat 
+			wait(.04)
+			for I, V in pairs(getconnections(HumanoidRootPart.ChildAdded)) do 
+				local Script = V.Function and rawget(getfenv(V.Function), 'script')
+				local FilteredName = Gsub(Script.Parent.Name, '%D+', '')
+				if Script.Name == 'LocalScript' and tonumber(FilteredName) ~= nil then
+					Connections[#Connections + 1] = V
+				end
+			end
+			for I, V in pairs(getconnections(UpperTorso.ChildAdded)) do 
+				local Script = V.Function and rawget(getfenv(V.Function), 'script')
+				local FilteredName = Gsub(Script.Parent.Name, '%D+', '')
+				if Script.Name == 'LocalScript' and tonumber(FilteredName) ~= nil then
+					Connections[#Connections + 1] = V
+				end
+			end
+		until #Connections >= 3
+
+		for I, V in pairs(Connections) do
+			V:Disable()
+		end
+	end
+	CharacterAdded(LP['Character'])
+	Connect(LP['CharacterAdded'], CharacterAdded)
+end
