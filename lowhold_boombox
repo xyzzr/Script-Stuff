@@ -1,0 +1,12 @@
+game.Players.LocalPlayer.Backpack.BoomBox.GripForward =  Vector3.new(-0, -1, 0)
+game.Players.LocalPlayer.Backpack.BoomBox.GripPos =  Vector3.new(-0.064, 0.835, -0)
+game.Players.LocalPlayer.Backpack.BoomBox.GripRight =  Vector3.new(-0, -0, -1)
+game.Players.LocalPlayer.Backpack.BoomBox.GripUp =  Vector3.new(-1, 0, 0)
+wait(0.2)
+game.Players.LocalPlayer:findFirstChildOfClass("Backpack")["BoomBox"].Parent = game.Players.LocalPlayer.Character
+wait(0.2)
+h = game.Players.LocalPlayer.Character.Humanoid
+tracks = h:GetPlayingAnimationTracks()
+for _,x in pairs(tracks)
+do x:Stop()
+end
