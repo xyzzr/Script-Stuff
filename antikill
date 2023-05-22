@@ -1,0 +1,2 @@
+game.Players.LocalPlayer.Character.Humanoid:SetStateEnabled("Seated", false)
+game.Players.LocalPlayer.Character.Humanoid.Sit = true
