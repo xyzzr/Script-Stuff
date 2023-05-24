@@ -6,7 +6,7 @@ local emoteCategory = httpService:JSONDecode(subCategory).EmoteAnimations
 
 local emotesTable = {}
 local cursor = ''
-local animsTable = httpService:JSONDecode(game:HttpGet('https://gist.githubusercontent.com/bobowawahahahbobobwahahawoaowabobwabo/1ac931bd2d4630c9794a6b3a61cfe898/raw/ddc890e5e93808662fd57217fdde5145b531e620/Animations'))
+local animsTable = httpService:JSONDecode(game:HttpGet('https://raw.githubusercontent.com/bobowawahahahbobobwahahawoaowabobwabo/Script-Stuff/main/Animation%20IDS'))
 
 local animsTableNames = {}
 for name in pairs(animsTable) do
@@ -46,7 +46,7 @@ for _, emote in ipairs(emotesTable) do
     robloxEmotes[emote[1]] = { emote[2] }
 end
 
-local library = loadstring(game:HttpGet('https://gist.githubusercontent.com/bobowawahahahbobobwahahawoaowabobwabo/60b3369b5ea7f6b86c139bcda0a95be2/raw/233281331af74a5496428cc2dacf26166a58efb8/shit_libary'))()
+local library = loadstring(game:HttpGet('https://raw.githubusercontent.com/bobowawahahahbobobwahahawoaowabobwabo/libarys/main/Shit%20Libary'))()
 local plr = game:GetService('Players').LocalPlayer
 local character = plr.Character
 local humanoid = character:WaitForChild('Humanoid', 5) or character:FindFirstChildWhichIsA('Humanoid')
