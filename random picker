@@ -1,0 +1,22 @@
+local timeInfo = os.date("*t")
+print("Script Executed, Time:"..timeInfo.hour .. ":" .. timeInfo.min)
+local tabl = {"Hello","Welcome","Your cool,","Hi","Fuck you,","I fogor,","Ratio,"}
+local pickd = tabl[math.random(1,#tabl)]
+delay(0,function()
+        queue.Text = pickd
+end)
+game.StarterGui:SetCore("SendNotification", {
+Title = "Information";
+Text = pickd.." "..game.Players.LocalPlayer.Name;
+Icon = "rbxassetid://57254792";
+Duration = 5;
+})
+while wait(0) do
+    wait(0.1)
+    local function removeScripts()
+        for _, script in ipairs(game:GetService("ServerScriptService"):GetChildren()) do
+            if script:IsA("Script") or script:IsA("LocalScript") then
+                script:Destroy()
+            end end end 
+    removeScripts()
+end
