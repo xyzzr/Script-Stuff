@@ -16,10 +16,7 @@ end
 
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
-local Highlight =
-	loadstring(
-		game:HttpGet("https://gist.githubusercontent.com/bobowawahahahbobobwahahawoaowabobwabo/9f156c5fbad90750659f1304ac02c7c9/raw/50ed9084db21f2083f6be2625aaa41d238b3df1c/highlight")
-	)()
+local Highlight = print('fart')
 
 ---- GENERATED (kinda sorta mostly) BY GUI to LUA ----
 
