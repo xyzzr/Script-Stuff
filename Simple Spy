@@ -16,7 +16,6 @@ end
 
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
-local Highlight = print('fart')
 
 ---- GENERATED (kinda sorta mostly) BY GUI to LUA ----
 
