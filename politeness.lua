@@ -1,5 +1,5 @@
-shared.CustomCorrections = shared.CustomCorrections or {}
 
+shared.CustomCorrections = shared.CustomCorrections or {}
 local Corrections = {
     ["i"] = "I",
     ["im"] = "I'm",
@@ -21,7 +21,41 @@ local Corrections = {
     ["anymor"] = "anymore",
     ["amerika"] = "america",
     ["gremmer"] = "grammar",
-    
+    ["gme"] = "game",
+    ["pls"] = "please",
+    ["rde"] = "red",
+    ["absense"] = "absence",
+    ["abscence"] = "absence",
+    ["accomodate"] = "accommodate",
+    ["accomodation"] = "accommodation",
+    ["acheive"] = "achieve",
+    ["accross"] = "across",
+    ["agressive"] = "aggressive",
+    ["appearence"] = "appearance",
+    ["arguement"] = "argument",
+    ["enviroment"] = "environment",
+    ["basically"] = "basically",
+    ["existence"] = "existance",
+    ["familar"] = "familiar",
+    ["finaly"] = "finally",
+    ["fourty"] = "forty",
+    ["foward"] = "forward",
+    ["harrass"] = "harass",
+    ["harrassment"] = "harassment",
+    ["mispell"] = "misspell",
+    ["noticable"] = "noticeable",
+    ["occurance"] = "occurrence",--
+    ["politican"] = "politician",
+    ["prefering"] = "preferring",
+    ["prefered"] = "preferred",
+    ["priviledge"] = "privilege",
+    ["sence"] = "sense",
+    ["succesful"] = "successful",
+    ["truely"] = "truly",
+    ["untill"] = "until",
+    ["viscious"] = "vicious",
+    ["wether"] = "weather",
+    ["waether"] = "weather",
 }
 
 for i, v in pairs(shared.CustomCorrections) do
@@ -32,7 +66,6 @@ for i, v in pairs(shared.CustomCorrections) do
     Corrections[i] = v
 end
 table.clear(shared.CustomCorrections)
-
 local Questions = {
     "mean",
     "ask",
@@ -64,7 +97,6 @@ local function ConvertWords(Table)
             if Corrections[v] then
                 pcall(function()
                 if Table[i] == Table[1] then
-                    -- Making the first letter uppercase just in case if it needs to be corrected.
                     local Corrected = Corrections[v]
                     local FirstLetter = GrabFirstLetter(Corrected)
                     local Lowercased = GrabLowercased(Corrected)
@@ -78,7 +110,6 @@ local function ConvertWords(Table)
     end
 end
 
-
 if not hookmetamethod then
     return game.Players.LocalPlayer:Kick("Get a better executor | Not supported")
 end
@@ -89,19 +120,12 @@ OldNamecall = hookmetamethod(game,"__namecall",function(...)
     local Arguments = {...}
     if Method == "FireServer" and tostring(Arguments[1]) == "SayMessageRequest" then
         local Text = Arguments[2]
-
-
-        -- First letter converting
         local FirstLetter = GrabFirstLetter(Text)
         local Lowercased = GrabLowercased(Text)
         local CapitalText = AddStrings(FirstLetter:upper(),Lowercased)
-        
-        -- Word correction
         local Table = string.split(CapitalText," ")
         local Corrected = ConvertWords(Table)  
         local Final = ""
-
-        -- Adding all the words back
         for i, v in pairs(Table) do
             if Table[i] == Table[1] then
                 Final = Final..v
@@ -109,12 +133,9 @@ OldNamecall = hookmetamethod(game,"__namecall",function(...)
                 Final = Final.." "..v
             end
         end
-
-        -- Adding dots n shit
         local LastCharacter = GrabLastCharacter(Final)
         if LastCharacter == "!" or LastCharacter == "." or LastCharacter == "?" then
             Arguments[2] = Final
-        
         else
             if table.find(Questions,Table[#Table]:lower()) then
                 Arguments[2] = Final.."?"
