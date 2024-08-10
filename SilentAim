@@ -446,4 +446,3 @@ oldIndex = hookmetamethod(game, "__index", newcclosure(function(self, Index)
     end
     return oldIndex(self, Index)
 end))
---    End Of Methods
